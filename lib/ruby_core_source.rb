@@ -52,6 +52,11 @@ module Ruby_core_source
   end
 
   def self.no_source_abort(ruby_version)
-    abort "No source for #{ruby_version} provided with debugger-ruby_core_source gem."
+    abort <<-STR
+Makefile creation failed
+**************************************************************************
+No source for #{ruby_version} provided with debugger-ruby_core_source gem.
+**************************************************************************
+STR
   end
 end
