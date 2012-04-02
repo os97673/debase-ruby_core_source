@@ -1,3 +1,4 @@
+
 require 'rbconfig'
 require 'tempfile'
 require 'tmpdir'
@@ -43,36 +44,10 @@ def create_makefile_with_core(hdrs, name)
     end
   }
 
-  #
-  # Figure out if we can actually write to the rubyhdrdir
-  # If not, set dest_dir to be local to our extracted source
-  #
-  begin
-    FileUtils.mkdir_p(dest_dir)
-  rescue Errno::EACCES
-    dest_dir = File.join(Dir.getwd, ruby_dir)
-    FileUtils.mkdir_p(dest_dir)
+  dest_dir = File.dirname(__FILE__) + "/debugger/ruby_core_source/#{ruby_dir}"
+  unless File.directory?(dest_dir)
+    abort "No source for #{ruby_dir} provided with ruby_core_source gem."
   end
-
-  #
-  # Download the headers
-  #
-  uri_path = "http://ftp.ruby-lang.org/pub/ruby/1.9/" + ruby_dir + ".tar.gz"
-  Tempfile.open("ruby-src") { |temp|
-
-    temp.binmode
-    uri = URI.parse(uri_path)
-    uri.download(temp)
-
-    tgz = Zlib::GzipReader.new(File.open(temp, "rb"))
-
-    Dir.mktmpdir { |dir|
-      inc_dir = dir + "/" + ruby_dir + "/*.inc"
-      hdr_dir = dir + "/" + ruby_dir + "/*.h"
-      Archive::Tar::Minitar.unpack(tgz, dir)
-      FileUtils.cp(Dir.glob([ inc_dir, hdr_dir ]), dest_dir)
-    }
-  }
 
   with_cppflags("-I" + dest_dir) {
     if hdrs.call
