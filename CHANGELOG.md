@@ -1,3 +1,9 @@
+## 1.1.0
+* Change main API method used by others to Debugger::RubyCoreSource.
+* remove lib/ruby_core_source.rb
+* Remove lib/contrib* and use open-uri for rake tasks
+* Safety check for config key rubyhdrdir
+
 ## 1.0.1
 * Add 1.9.2-p138 headers
 
