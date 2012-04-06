@@ -38,7 +38,7 @@ module Debugger
       end
 
       # Look for sources that ship with gem
-      dest_dir = File.dirname(__FILE__) + "/debugger/ruby_core_source/#{ruby_dir}"
+      dest_dir = File.dirname(__FILE__) + "/ruby_core_source/#{ruby_dir}"
       no_source_abort(ruby_dir) unless File.directory?(dest_dir)
 
       with_cppflags("-I" + dest_dir) {
