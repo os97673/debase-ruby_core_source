@@ -13,10 +13,7 @@ module Debugger
     }
 
     def self.create_makefile_with_core(hdrs, name)
-
-      #
       # First, see if the gem already has the needed headers
-      #
       if hdrs.call
         create_makefile(name)
         return true
@@ -29,16 +26,16 @@ module Debugger
         "ruby-#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
       end
 
-      #
       # Check if core headers were already downloaded; if so, use them
-      #
-      dest_dir = RbConfig::CONFIG["rubyhdrdir"] + "/" + ruby_dir
-      with_cppflags("-I" + dest_dir) {
-        if hdrs.call
-          create_makefile(name)
-          return true
-        end
-      }
+      if RbConfig::CONFIG["rubyhdrdir"]
+        dest_dir = RbConfig::CONFIG["rubyhdrdir"] + "/" + ruby_dir
+        with_cppflags("-I" + dest_dir) {
+          if hdrs.call
+            create_makefile(name)
+            return true
+          end
+        }
+      end
 
       # Look for sources that ship with gem
       dest_dir = File.dirname(__FILE__) + "/debugger/ruby_core_source/#{ruby_dir}"
