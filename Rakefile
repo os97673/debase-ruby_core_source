@@ -1,7 +1,5 @@
-require 'tempfile'
 require 'tmpdir'
-require 'uri'
-require 'contrib/uri_ext'
+require 'open-uri'
 require 'archive/tar/minitar'
 require 'zlib'
 require 'fileutils'
@@ -13,20 +11,16 @@ task :add_source do
   uri_path = "http://ftp.ruby-lang.org/pub/ruby/1.9/#{ruby_dir}.tar.gz"
   dest_dir = File.dirname(__FILE__) + "/lib/debugger/ruby_core_source/#{ruby_dir}"
 
-  Tempfile.open("ruby-src") do |temp|
-    temp.binmode
-    uri = URI.parse(uri_path)
-    uri.download(temp)
+  puts "Downloading #{uri_path}..."
+  temp = open(uri_path)
+  puts "Unpacking #{uri_path}..."
+  tgz = Zlib::GzipReader.new(File.open(temp, "rb"))
 
-    tgz = Zlib::GzipReader.new(File.open(temp, "rb"))
-
-    FileUtils.mkdir_p(dest_dir)
-    Dir.mktmpdir do |dir|
-      inc_dir = dir + "/" + ruby_dir + "/*.inc"
-      hdr_dir = dir + "/" + ruby_dir + "/*.h"
-      Archive::Tar::Minitar.unpack(tgz, dir)
-      FileUtils.cp(Dir.glob([ inc_dir, hdr_dir ]), dest_dir)
-    end
+  FileUtils.mkdir_p(dest_dir)
+  Dir.mktmpdir do |dir|
+    inc_dir = dir + "/" + ruby_dir + "/*.inc"
+    hdr_dir = dir + "/" + ruby_dir + "/*.h"
+    Archive::Tar::Minitar.unpack(tgz, dir)
+    FileUtils.cp(Dir.glob([ inc_dir, hdr_dir ]), dest_dir)
   end
-
 end
