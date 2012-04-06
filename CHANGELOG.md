@@ -1,3 +1,6 @@
+## 1.1.1
+* Fix location of ruby source headers
+
 ## 1.1.0
 * Change main API method used by others to Debugger::RubyCoreSource.
 * remove lib/ruby_core_source.rb
