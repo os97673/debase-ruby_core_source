@@ -21,6 +21,9 @@ To add another ruby version's source to this gem's directory:
 
     $ rake add_source VERSION=1.9.3-p0
 
+##Credits
+* @stepheneb for 1.9.2-p320 headers
+
 ## LICENSE
 Ruby library code is MIT license, see LICENSE.txt.  Included ruby headers,
 lib/debugger/ruby\_core\_source/, are mostly Ruby license, see RUBY\_LICENSE. Some headers have

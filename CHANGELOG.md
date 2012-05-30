@@ -1,3 +1,6 @@
+## 1.1.3
+* Add 1.9.2-p320 headers
+
 ## 1.1.2
 * Add 1.9.3-p194 headers
 
