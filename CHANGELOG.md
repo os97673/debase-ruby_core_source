@@ -1,3 +1,6 @@
+## 1.1.7
+* Add 1.9.3-p374 headers
+
 ## 1.1.6
 * Add 1.9.3-p362 headers
 
