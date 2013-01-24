@@ -12,7 +12,8 @@ Gem::Specification.new do |s|
   s.description = %q{Provide Ruby core source files for C extensions that need them.}
   s.required_rubygems_version = ">= 1.3.6"
   s.extra_rdoc_files = [ "README.md"]
-  s.files = Dir["#{File.dirname(__FILE__)}/lib/**/*"]
+  s.files = Dir["#{File.dirname(__FILE__)}/lib/**/*{.rb,inc,h}"] +
+    Dir["#{File.dirname(__FILE__)}/{Rakefile,README.md,CHANGELOG.md,debugger-ruby_core_source.gemspec}"]
   s.add_development_dependency "archive-tar-minitar", ">= 0.5.2"
   s.add_development_dependency 'rake', '~> 0.9.2'
 end
