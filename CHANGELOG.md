@@ -1,3 +1,7 @@
+## 1.1.8
+* Add 1.9.3-p385 headers
+* Support ruby 2.0 from add_source task
+
 ## 1.1.7
 * Add 1.9.3-p374 headers
 
