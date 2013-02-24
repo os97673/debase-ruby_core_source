@@ -1,3 +1,6 @@
+## 1.1.10
+* Add 2.0.0-p0 headers
+
 ## 1.1.9
 * Add 1.9.3-p392 headers
 
