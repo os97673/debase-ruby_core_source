@@ -24,7 +24,7 @@ To add another ruby version's source to this gem's directory:
 ##Credits
 * @stepheneb for 1.9.2-p320 headers
 * @jeremy for 1.9.3-p286 headers
-* @eiel for 1.9.3-p327, 1.9.3-p362 headers
+* @eiel for 1.9.3-p327, 1.9.3-p362, 2.0.0* headers
 * @willian for 1.9.3-p374 headers
 
 ## LICENSE
