@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/cldwalker/debugger-ruby_core_source"
   s.summary = %q{Provide Ruby core source files}
   s.description = %q{Provide Ruby core source files for C extensions that need them.}
+  s.license = "MIT"
   s.required_rubygems_version = ">= 1.3.6"
   s.extra_rdoc_files = [ "README.md"]
   s.files = Dir["#{File.dirname(__FILE__)}/lib/**/*{.rb,inc,h}"] +
