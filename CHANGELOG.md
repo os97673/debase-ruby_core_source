@@ -1,3 +1,6 @@
+## 1.3.1
+* Fix 2.1.0 location
+
 ## 1.3.0
 * Add 2.1.0 headers
 

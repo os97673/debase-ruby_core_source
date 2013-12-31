@@ -26,6 +26,7 @@ To add another ruby version's source to this gem's directory:
 * @jeremy for 1.9.3-p286 headers
 * @eiel for 1.9.3-p327, 1.9.3-p362, 2.0.0* headers
 * @willian for 1.9.3-p374 headers
+* @formigarafa for fixing 2.1.0 headers
 
 ## LICENSE
 Ruby library code is MIT license, see LICENSE.txt.  Included ruby headers,
