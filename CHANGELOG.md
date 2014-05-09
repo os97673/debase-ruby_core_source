@@ -1,3 +1,6 @@
+## 1.3.3
+* Add 2.1.2 headers
+
 ## 1.3.2
 * Add 2.1.1 headers
 * Add 2.0.0-p451 headers
