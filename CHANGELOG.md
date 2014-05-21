@@ -1,3 +1,6 @@
+## 1.3.5
+* Add 1.9.3-p547 headers
+
 ## 1.3.4
 * Add 2.0.0-p481 headers
 
