@@ -1,7 +1,7 @@
 ## Description
 Fork of [ruby\_core\_source](https://github.com/mark-moseley/ruby_core_source)
 that uses included Ruby headers (\*.h and \*.inc) instead of downloading
-them. Used by [debugger](http://github.com/cldwalker/debugger).
+them. Used by [debugger](http://github.com/cldwalker/debugger). ruby >= 2.0 is _not_ supported - [for more info](https://github.com/cldwalker/debugger#known-issues).
 
 ##Usage
 
