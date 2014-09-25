@@ -1,7 +1,7 @@
 require 'debugger/ruby_core_source/version'
 require 'rbconfig'
 
-module Debugger
+module Debase
   module RubyCoreSource
     REVISION_MAP = {
       24186 => 'ruby-1.9.2-preview1',
@@ -58,7 +58,7 @@ module Debugger
       abort <<-STR
 Makefile creation failed
 **************************************************************************
-No source for #{ruby_version} provided with debugger-ruby_core_source gem.
+No source for #{ruby_version} provided with debase-ruby_core_source gem.
 **************************************************************************
 STR
     end
