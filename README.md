@@ -19,7 +19,9 @@ end
 
 To add another ruby version's source to this gem's directory:
 
-    $ rake add_source VERSION=1.9.3-p0
+    $ rake add_source VERSION=2.1.3 PATCHLEVEL=242
+
+(for pre-releases PATCHLEVEL should not be provided)
 
 ##Credits
 * @reedloden for 1.9.3-p547 headers
