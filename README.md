@@ -1,7 +1,7 @@
 ## Description
 Fork of [debugger-ruby\_core\_source](https://github.com/cldwalker/debugger-ruby_core_source)
 that uses included Ruby headers (\*.h and \*.inc) instead of downloading
-them. Used by [debase](http://github.com/idenofevil/debase).
+them. Used by [debase](http://github.com/denofevil/debase).
 Only ruby >= 2.0.0 is supported (debase doesn't work for older rubies)
 
 ##Usage
