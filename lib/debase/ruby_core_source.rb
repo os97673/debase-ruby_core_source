@@ -4,12 +4,6 @@ require 'rbconfig'
 module Debase
   module RubyCoreSource
     REVISION_MAP = {
-      24186 => 'ruby-1.9.2-preview1',
-      27362 => 'ruby-1.9.2-preview3',
-      28524 => 'ruby-1.9.2-rc1',
-      28618 => 'ruby-1.9.2-rc2',
-      32789 => 'ruby-1.9.3-preview1',
-      33323 => 'ruby-1.9.3-rc1',
       37411 => 'ruby-2.0.0-preview1',
       38126 => 'ruby-2.0.0-preview2',
       38733 => 'ruby-2.0.0-rc1',
