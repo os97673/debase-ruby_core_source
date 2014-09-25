@@ -2,6 +2,7 @@
 Fork of [debugger-ruby\_core\_source](https://github.com/cldwalker/debugger-ruby_core_source)
 that uses included Ruby headers (\*.h and \*.inc) instead of downloading
 them. Used by [debase](http://github.com/idenofevil/debase).
+Only ruby >= 2.0.0 is supported (debase doesn't work for older rubies)
 
 ##Usage
 
@@ -24,12 +25,7 @@ To add another ruby version's source to this gem's directory:
 (for pre-releases PATCHLEVEL should not be provided)
 
 ##Credits
-* @reedloden for 1.9.3-p547 headers
 * @andremedeiros for 2.1.1 headers
-* @stepheneb for 1.9.2-p320 headers
-* @jeremy for 1.9.3-p286 headers
-* @eiel for 1.9.3-p327, 1.9.3-p362, 2.0.0* headers
-* @willian for 1.9.3-p374 headers
 * @formigarafa for fixing 2.1.0 headers
 
 ## LICENSE
