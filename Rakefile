@@ -3,7 +3,7 @@ require 'open-uri'
 require 'archive/tar/minitar'
 require 'zlib'
 require 'fileutils'
-require 'bundler/tasks'
+require 'bundler'
 Bundler::GemHelper.install_tasks
 
 desc 'Add ruby headers under lib for a given VERSION'
