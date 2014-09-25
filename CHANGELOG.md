@@ -1,8 +1,8 @@
-## [0.3.0](https://github.com/os97673/debase-ruby_core_source/compare/v.0.2.0...v.0.3.0)
+## [0.3.0](https://github.com/os97673/debase-ruby_core_source/compare/v0.2.0...v0.3.0)
 
 * gem installation fixed
 
-## [0.2.0](https://github.com/os97673/debase-ruby_core_source/compare/v.0.1.0...v.0.2.0)
+## [0.2.0](https://github.com/os97673/debase-ruby_core_source/compare/v0.1.0...v0.2.0)
 
 * gem's homepage fixed
 * gem required ruby ~> 2.0
