@@ -1,4 +1,4 @@
- encoding: utf-8 -*-
+# encoding: utf-8 -*-
 require 'rubygems' unless defined? Gem
 require File.dirname(__FILE__) + "/lib/debase/ruby_core_source/version"
 
