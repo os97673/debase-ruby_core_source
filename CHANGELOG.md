@@ -1,3 +1,7 @@
+## [0.3.0](https://github.com/os97673/debase-ruby_core_source/compare/v0.3.0...v0.4.0)
+
+* build fixed
+
 ## [0.3.0](https://github.com/os97673/debase-ruby_core_source/compare/v0.2.0...v0.3.0)
 
 * gem installation fixed

@@ -1,4 +1,4 @@
-require 'debugger/ruby_core_source/version'
+require 'debase/ruby_core_source/version'
 require 'rbconfig'
 
 module Debase
