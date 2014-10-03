@@ -27,8 +27,13 @@ task :add_source do
   Dir.mktmpdir do |dir|
     inc_dir = dir + "/" + ruby_dir + "/*.inc"
     hdr_dir = dir + "/" + ruby_dir + "/*.h"
+    more_hdr_dir = dir + "/" + ruby_dir + "/ccan/**/*.h"
     Archive::Tar::Minitar.unpack(tgz, dir)
-    FileUtils.cp(Dir.glob([ inc_dir, hdr_dir ]), dest_dir)
+    Dir.glob([ inc_dir, hdr_dir, more_hdr_dir ]).each do |file|
+      target = file.sub(dir + '/' + ruby_dir, dest_dir)
+      FileUtils.mkdir_p(File.dirname(target))
+      FileUtils.cp(file, target, verbose: false)
+    end
   end
 end
 
