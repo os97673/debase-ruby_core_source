@@ -1,3 +1,8 @@
+## [0.7.2](https://github.com/os97673/debase-ruby_core_source/compare/v0.7.0...v0.7.2)
+
+* sources for ruby 2.0.0-p598 added
+* sources for ruby 2.1.5 added
+
 ## [0.7.0](https://github.com/os97673/debase-ruby_core_source/compare/v0.6.0...v0.7.0)
 
 * ruby 2.1.4 added
