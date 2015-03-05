@@ -1,3 +1,7 @@
+## [0.7.7](https://github.com/os97673/debase-ruby_core_source/compare/v0.7.6...v0.7.7)
+
+* added missing ruby 2.2.1 patchlevel
+
 ## [0.7.6](https://github.com/os97673/debase-ruby_core_source/compare/v0.7.5...v0.7.6)
 
 * ruby 2.2.1 added
