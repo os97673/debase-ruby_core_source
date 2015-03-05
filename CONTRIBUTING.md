@@ -1,1 +1,2 @@
-Thanks for trying out this project! [See here for contribution guidelines.](http://tagaholic.me/contributing.html)
+To add headers for a new release run "rake add_source" with VERSION and PATCHLEVEL provide.
+e.g. "rake add_source VERSION=2.1.3 PATCHLEVEL=242"
