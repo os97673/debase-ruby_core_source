@@ -1,3 +1,7 @@
+## [0.7.8](https://github.com/os97673/debase-ruby_core_source/compare/v0.7.7...v0.7.8)
+
+* ruby 2.0.0-p643 added
+
 ## [0.7.7](https://github.com/os97673/debase-ruby_core_source/compare/v0.7.6...v0.7.7)
 
 * added missing ruby 2.2.1 patchlevel
