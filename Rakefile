@@ -6,7 +6,7 @@ require 'fileutils'
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
-desc 'Add ruby headers under lib for a given VERSION and PATHCLEVEL'
+desc 'Add ruby headers under lib for a given VERSION and PATCHLEVEL'
 task :add_source do
   version = ENV['VERSION'] or abort "Need a $VERSION"
   patchlevel = ENV['PATCHLEVEL'] or abort "Need a $PATCHLEVEL"
