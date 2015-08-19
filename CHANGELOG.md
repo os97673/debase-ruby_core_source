@@ -1,6 +1,7 @@
 ## [0.7.10](https://github.com/os97673/debase-ruby_core_source/compare/v0.7.9...v0.7.10)
 
 * ruby 2.2.3 added
+* ruby 2.0.0-p647 added
 
 ## [0.7.9](https://github.com/os97673/debase-ruby_core_source/compare/v0.7.8...v0.7.9)
 
