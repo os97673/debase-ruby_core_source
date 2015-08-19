@@ -25,6 +25,8 @@ To add another ruby version's source to this gem's directory:
 (for pre-releases PATCHLEVEL should not be provided)
 
 ##Credits
+
+* @dirknilius for 2.2.3 headers
 * @andremedeiros for 2.1.1 headers
 * @formigarafa for fixing 2.1.0 headers
 
