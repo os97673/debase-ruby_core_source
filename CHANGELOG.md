@@ -1,3 +1,8 @@
+## [0.8.0](https::/github.com/os97673/debase-ruby_core_source/compare/v0.7.10...v0.8.0)
+
+* previous version of ruby is used if there is no headers for the
+  current one.
+
 ## [0.7.10](https://github.com/os97673/debase-ruby_core_source/compare/v0.7.9...v0.7.10)
 
 * ruby 2.2.3 added
@@ -67,7 +72,7 @@
 * gem required ruby ~> 2.0
 * sources for < 2.0 removed
 
-## 0.1.0 
+## 0.1.0
 
 * Initial release - gem renamed to debase-ruby_source_code, Debugger module renamed to Debase
 * sources for 2.1.3 and 2.2.0-preview1 added
