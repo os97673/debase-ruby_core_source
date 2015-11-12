@@ -11,6 +11,7 @@ module Debase
       47618 => 'ruby-2.2.0-preview1',
       48629 => 'ruby-2.2.0-preview2',
       48887 => 'ruby-2.2.0-rc1',
+      52539 => 'ruby-2.3.0-preview1',
     }
 
     def self.create_makefile_with_core(hdrs, name)

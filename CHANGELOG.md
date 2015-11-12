@@ -1,3 +1,7 @@
+## [0.8.1](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.0...v0.8.1)
+
+* ruby 2.3.0-preview1 added
+
 ## [0.8.0](https::/github.com/os97673/debase-ruby_core_source/compare/v0.7.10...v0.8.0)
 
 * previous version of ruby is used if there is no headers for the
