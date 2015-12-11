@@ -1,3 +1,7 @@
+## [0.8.2](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.1...v0.8.2)
+
+* ruby 2.3.0-preview2 added
+
 ## [0.8.1](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.0...v0.8.1)
 
 * ruby 2.3.0-preview1 added
