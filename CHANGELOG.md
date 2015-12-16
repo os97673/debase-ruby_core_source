@@ -1,3 +1,9 @@
+## [0.8.3](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.2...v0.8.3)
+
+* ruby 2.0.0-p648 added
+* ruby 2.1.8 added
+* ruby 2.2.4 added
+
 ## [0.8.2](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.1...v0.8.2)
 
 * ruby 2.3.0-preview2 added
