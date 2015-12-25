@@ -45,6 +45,7 @@ static const char *const insn_name_info[] = {
   "putstring",
   "concatstrings",
   "tostring",
+  "freezestring",
   "toregexp",
   "newarray",
   "duparray",
@@ -139,6 +140,7 @@ static const char *const insn_operand_info[] = {
   "V",
   "N",
   "",
+  "V",
   "NN",
   "N",
   "V",
@@ -233,6 +235,7 @@ static const int insn_len_info[] = {
   2,
   2,
   1,
+  2,
   3,
   2,
   2,
@@ -320,6 +323,7 @@ static const int insn_stack_push_num_info[] = {
   0,
   1,
   0,
+  1,
   1,
   1,
   1,
@@ -470,6 +474,9 @@ insn_stack_increase(int depth, int insn, VALUE *opes)
         return depth + inc;
         }
         case BIN(tostring):{
+          return depth + 0;
+        }
+        case BIN(freezestring):{
           return depth + 0;
         }
         case BIN(toregexp):{

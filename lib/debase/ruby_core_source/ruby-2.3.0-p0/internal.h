@@ -491,6 +491,7 @@ struct RClass {
 
 void rb_class_subclass_add(VALUE super, VALUE klass);
 void rb_class_remove_from_super_subclasses(VALUE);
+int rb_singleton_class_internal_p(VALUE sklass);
 
 #define RCLASS_EXT(c) (RCLASS(c)->ptr)
 #define RCLASS_IV_TBL(c) (RCLASS_EXT(c)->iv_tbl)
@@ -725,6 +726,7 @@ void rb_encdb_declare(const char *name);
 void rb_enc_set_base(const char *name, const char *orig);
 int rb_enc_set_dummy(int index);
 void rb_encdb_set_unicode(int index);
+int rb_data_is_encoding(VALUE obj);
 
 /* enum.c */
 VALUE rb_f_send(int argc, VALUE *argv, VALUE recv);
@@ -734,6 +736,8 @@ extern VALUE rb_eEAGAIN;
 extern VALUE rb_eEWOULDBLOCK;
 extern VALUE rb_eEINPROGRESS;
 NORETURN(PRINTF_ARGS(void rb_compile_bug(const char*, int, const char*, ...), 3, 4));
+NORETURN(PRINTF_ARGS(void rb_compile_bug_str(VALUE file, int line, const char *fmt, ...), 3, 4));
+PRINTF_ARGS(void rb_compile_error_str(VALUE file, int line, void *enc, const char *fmt, ...), 4, 5);
 VALUE rb_check_backtrace(VALUE);
 NORETURN(void rb_async_bug_errno(const char *,int));
 const char *rb_builtin_type_name(int t);
@@ -837,6 +841,7 @@ st_table *rb_init_identtable_with_size(st_index_t size);
 #define RHASH_TBL_RAW(h) rb_hash_tbl_raw(h)
 VALUE rb_hash_keys(VALUE hash);
 VALUE rb_hash_values(VALUE hash);
+VALUE rb_hash_rehash(VALUE hash);
 #define HASH_DELETED  FL_USER1
 #define HASH_PROC_DEFAULT FL_USER2
 
@@ -969,6 +974,7 @@ rb_float_new_inline(double d)
 void rb_obj_copy_ivar(VALUE dest, VALUE obj);
 VALUE rb_obj_equal(VALUE obj1, VALUE obj2);
 VALUE rb_class_search_ancestor(VALUE klass, VALUE super);
+NORETURN(void rb_undefined_alloc(VALUE klass));
 double rb_num_to_dbl(VALUE val);
 VALUE rb_obj_dig(int argc, VALUE *argv, VALUE self, VALUE notfound);
 
@@ -1136,11 +1142,31 @@ VALUE rb_sym_to_proc(VALUE sym);
 
 /* symbol.c */
 #ifdef RUBY_ENCODING_H
-VALUE rb_cstr_intern(const char *ptr, long len, rb_encoding *enc);
+VALUE rb_sym_intern(const char *ptr, long len, rb_encoding *enc);
+VALUE rb_sym_intern_cstr(const char *ptr, rb_encoding *enc);
+#ifdef __GNUC__
+#define rb_sym_intern_cstr(ptr, enc) __extension__ ( \
+{						\
+    (__builtin_constant_p(ptr)) ?		\
+	rb_sym_intern((ptr), (long)strlen(ptr), (enc)) : \
+	rb_sym_intern_cstr((ptr), (enc)); \
+})
+#endif
+#endif
+VALUE rb_sym_intern_ascii(const char *ptr, long len);
+VALUE rb_sym_intern_ascii_cstr(const char *ptr);
+#ifdef __GNUC__
+#define rb_sym_intern_ascii_cstr(ptr) __extension__ ( \
+{						\
+    (__builtin_constant_p(ptr)) ?		\
+	rb_sym_intern_ascii((ptr), (long)strlen(ptr)) : \
+	rb_sym_intern_ascii_cstr(ptr); \
+})
 #endif
 
 /* struct.c */
 VALUE rb_struct_init_copy(VALUE copy, VALUE s);
+VALUE rb_struct_lookup(VALUE s, VALUE idx);
 
 /* time.c */
 struct timeval rb_time_timeval(VALUE);
@@ -1184,9 +1210,10 @@ size_t rb_generic_ivar_memsize(VALUE);
 VALUE rb_search_class_path(VALUE);
 VALUE rb_attr_delete(VALUE, ID);
 VALUE rb_ivar_lookup(VALUE obj, ID id, VALUE undef);
+void rb_autoload_str(VALUE mod, ID id, VALUE file);
 
 /* version.c */
-extern VALUE ruby_engine_name;
+extern const char ruby_engine[];
 
 /* vm_insnhelper.h */
 rb_serial_t rb_next_class_serial(void);
@@ -1290,6 +1317,7 @@ VALUE rb_ident_hash_new(void);
 
 /* io.c (export) */
 void rb_maygvl_fd_fix_cloexec(int fd);
+int rb_gc_for_fd(int err);
 
 /* numeric.c (export) */
 VALUE rb_int_positive_pow(long x, unsigned long y);
@@ -1318,6 +1346,9 @@ VALUE rb_gcd_gmp(VALUE x, VALUE y);
 /* internal use */
 VALUE rb_setup_fake_str(struct RString *fake_str, const char *name, long len, rb_encoding *enc);
 #endif
+
+/* thread.c (export) */
+int ruby_thread_has_gvl_p(void); /* for ext/fiddle/closure.c */
 
 /* util.c (export) */
 extern const signed char ruby_digit36_to_number_table[];

@@ -652,10 +652,18 @@ SC_ERROR,
 SC_ERROR,
 SC_ERROR,
 SC_ERROR,
+SC_ERROR},
+  {
+SC_ERROR,
+SC_ERROR,
+SC_ERROR,
+SC_ERROR,
+SC_ERROR,
 SC_ERROR}
 };
 
 static const VALUE sc_insn_next[] = {
+  SCS_XX,
   SCS_XX,
   SCS_XX,
   SCS_XX,

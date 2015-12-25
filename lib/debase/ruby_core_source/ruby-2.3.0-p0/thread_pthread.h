@@ -2,7 +2,7 @@
 
   thread_pthread.h -
 
-  $Author: normal $
+  $Author: kosaki $
 
   Copyright (C) 2004-2007 Koichi Sasada
 
@@ -26,7 +26,7 @@ typedef struct rb_thread_cond_struct {
 } rb_nativethread_cond_t;
 
 typedef struct native_thread_data_struct {
-    void *signal_thread_list;
+    struct list_node ubf_list;
     rb_nativethread_cond_t sleep_cond;
 } native_thread_data_t;
 

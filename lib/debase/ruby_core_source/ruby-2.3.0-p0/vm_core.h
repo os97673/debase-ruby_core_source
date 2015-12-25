@@ -257,10 +257,10 @@ struct rb_call_cache {
 #endif
 
 typedef struct rb_iseq_location_struct {
-    const VALUE path;
-    const VALUE absolute_path;
-    const VALUE base_label;
-    const VALUE label;
+    VALUE path;
+    VALUE absolute_path;
+    VALUE base_label;
+    VALUE label;
     VALUE first_lineno; /* TODO: may be unsigned short */
 } rb_iseq_location_t;
 
@@ -376,7 +376,7 @@ struct rb_iseq_constant_body {
 				      */
     struct rb_call_cache *cc_entries; /* size is ci_size = ci_kw_size */
 
-    const VALUE mark_ary;     /* Array: includes operands which should be GC marked */
+    VALUE mark_ary;     /* Array: includes operands which should be GC marked */
 
     unsigned int local_table_size;
     unsigned int is_size;
@@ -385,25 +385,41 @@ struct rb_iseq_constant_body {
     unsigned int line_info_size;
 };
 
-struct rb_iseq_variable_body {
-    const VALUE coverage;     /* coverage array */
-
-    rb_num_t flip_cnt;
-
-    /* original iseq, before encoding
-     * used for debug/dump (TODO: union with compile_data) */
-    VALUE *iseq;
-};
-
 /* T_IMEMO/iseq */
 /* typedef rb_iseq_t is in method.h */
 struct rb_iseq_struct {
     VALUE flags;
-    struct iseq_compile_data *compile_data; /* used at compile time */
+    VALUE reserved1;
     struct rb_iseq_constant_body *body;
-    struct rb_iseq_variable_body *variable_body;
-    VALUE dummy2;
+
+    union { /* 4, 5 words */
+	struct iseq_compile_data *compile_data; /* used at compile time */
+
+	struct {
+	    VALUE obj;
+	    int index;
+	} loader;
+    } aux;
 };
+
+#ifndef USE_LAZY_LOAD
+#define USE_LAZY_LOAD 0
+#endif
+
+#if USE_LAZY_LOAD
+const rb_iseq_t *rb_iseq_complete(const rb_iseq_t *iseq);
+#endif
+
+static inline const rb_iseq_t *
+rb_iseq_check(const rb_iseq_t *iseq)
+{
+#if USE_LAZY_LOAD
+    if (iseq->body == NULL) {
+	rb_iseq_complete((rb_iseq_t *)iseq);
+    }
+#endif
+    return iseq;
+}
 
 enum ruby_special_exceptions {
     ruby_error_reenter,
@@ -555,6 +571,9 @@ typedef struct rb_vm_struct {
 #define SYMBOL_REDEFINED_OP_FLAG (1 << 6)
 #define TIME_REDEFINED_OP_FLAG   (1 << 7)
 #define REGEXP_REDEFINED_OP_FLAG (1 << 8)
+#define NIL_REDEFINED_OP_FLAG    (1 << 9)
+#define TRUE_REDEFINED_OP_FLAG   (1 << 10)
+#define FALSE_REDEFINED_OP_FLAG  (1 << 11)
 
 #define BASIC_OP_UNREDEFINED_P(op, klass) (LIKELY((GET_VM()->redefined_flag[(op)]&(klass)) == 0))
 
@@ -817,6 +836,8 @@ VALUE rb_iseq_disasm(const rb_iseq_t *iseq);
 int rb_iseq_disasm_insn(VALUE str, const VALUE *iseqval, size_t pos, const rb_iseq_t *iseq, VALUE child);
 const char *ruby_node_name(int node);
 
+VALUE rb_iseq_coverage(const rb_iseq_t *iseq);
+
 RUBY_EXTERN VALUE rb_cISeq;
 RUBY_EXTERN VALUE rb_cRubyVM;
 RUBY_EXTERN VALUE rb_cEnv;
@@ -967,7 +988,7 @@ rb_block_t *rb_vm_control_frame_block_ptr(const rb_control_frame_t *cfp);
   (!RUBY_VM_VALID_CONTROL_FRAME_P((cfp), RUBY_VM_END_CONTROL_FRAME(th)))
 
 #define RUBY_VM_IFUNC_P(ptr)        (RB_TYPE_P((VALUE)(ptr), T_IMEMO) && imemo_type((VALUE)ptr) == imemo_ifunc)
-#define RUBY_VM_NORMAL_ISEQ_P(ptr)  (RB_TYPE_P((VALUE)(ptr), T_IMEMO) && imemo_type((VALUE)ptr) == imemo_iseq)
+#define RUBY_VM_NORMAL_ISEQ_P(ptr)  (RB_TYPE_P((VALUE)(ptr), T_IMEMO) && imemo_type((VALUE)ptr) == imemo_iseq && rb_iseq_check((rb_iseq_t *)ptr))
 
 #define RUBY_VM_GET_BLOCK_PTR_IN_CFP(cfp) ((rb_block_t *)(&(cfp)->self))
 #define RUBY_VM_GET_CFP_FROM_BLOCK_PTR(b) \
@@ -1036,7 +1057,6 @@ rb_vm_living_threads_remove(rb_vm_t *vm, rb_thread_t *th)
     vm->living_thread_num--;
 }
 
-int ruby_thread_has_gvl_p(void);
 typedef int rb_backtrace_iter_func(void *, VALUE, int, VALUE);
 rb_control_frame_t *rb_vm_get_ruby_level_next_cfp(const rb_thread_t *th, const rb_control_frame_t *cfp);
 rb_control_frame_t *rb_vm_get_binding_creatable_next_cfp(const rb_thread_t *th, const rb_control_frame_t *cfp);

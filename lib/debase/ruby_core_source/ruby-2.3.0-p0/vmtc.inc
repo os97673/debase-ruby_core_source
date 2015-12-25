@@ -34,6 +34,7 @@ static const void *const insns_address_table[] = {
   LABEL_PTR(putstring),
   LABEL_PTR(concatstrings),
   LABEL_PTR(tostring),
+  LABEL_PTR(freezestring),
   LABEL_PTR(toregexp),
   LABEL_PTR(newarray),
   LABEL_PTR(duparray),
