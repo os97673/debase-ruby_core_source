@@ -1,5 +1,5 @@
 module Debase
   module RubyCoreSource
-   VERSION = '0.8.6'
+   VERSION = '0.9.0'
   end
 end

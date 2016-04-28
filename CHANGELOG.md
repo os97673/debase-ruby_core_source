@@ -1,3 +1,9 @@
+## [0.9.0](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.6...v0.9.0)
+
+* ruby 2.3.1 added
+* ruby 2.2.5 added
+* add_source rake task reworked to extract patchlevel from sources
+
 ## [0.8.6](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.5...v0.8.6)
 
 * ruby 2.1.10 added
