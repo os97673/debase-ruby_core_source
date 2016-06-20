@@ -70,6 +70,8 @@ static const char *const insn_name_info[] = {
   "defineclass",
   "send",
   "opt_str_freeze",
+  "opt_newarray_max",
+  "opt_newarray_min",
   "opt_send_without_block",
   "invokesuper",
   "invokeblock",
@@ -165,6 +167,8 @@ static const char *const insn_operand_info[] = {
   "ISN",
   "CES",
   "V",
+  "N",
+  "N",
   "CE",
   "CES",
   "C",
@@ -260,6 +264,8 @@ static const int insn_len_info[] = {
   4,
   4,
   2,
+  2,
+  2,
   3,
   4,
   2,
@@ -353,6 +359,8 @@ static const int insn_stack_push_num_info[] = {
   1,
   1,
   0,
+  1,
+  1,
   1,
   1,
   1,
@@ -580,6 +588,18 @@ insn_stack_increase(int depth, int insn, VALUE *opes)
         }
         case BIN(opt_str_freeze):{
           return depth + 1;
+        }
+        case BIN(opt_newarray_max):{
+          int inc = 0;
+        int num = FIX2INT(opes[0]);
+        inc += 1 - num;;
+        return depth + inc;
+        }
+        case BIN(opt_newarray_min):{
+          int inc = 0;
+        int num = FIX2INT(opes[0]);
+        inc += 1 - num;;
+        return depth + inc;
         }
         case BIN(opt_send_without_block):{
           int inc = 0;

@@ -118,6 +118,8 @@ enum ruby_method_ids {
     id_core_hash_merge_kwd,
     id_debug_created_info,
     tPRESERVED_ID_END,
+    tMax,
+    tMin,
     tFreeze,
     tInspect,
     tIntern,
@@ -160,8 +162,12 @@ enum ruby_method_ids {
     tMesg,
     tException,
     tUScore,
+    tLASTLINE,
+    tBACKREF,
     tNEXT_ID,
 #define TOKEN2LOCALID(n) id##n = ((t##n<<ID_SCOPE_SHIFT)|ID_LOCAL|ID_STATIC_SYM)
+    TOKEN2LOCALID(Max),
+    TOKEN2LOCALID(Min),
     TOKEN2LOCALID(Freeze),
     TOKEN2LOCALID(Inspect),
     TOKEN2LOCALID(Intern),
@@ -204,6 +210,9 @@ enum ruby_method_ids {
     TOKEN2LOCALID(Mesg),
     TOKEN2LOCALID(Exception),
     TOKEN2LOCALID(UScore),
+#define TOKEN2GLOBALID(n) id##n = ((t##n<<ID_SCOPE_SHIFT)|ID_GLOBAL|ID_STATIC_SYM)
+    TOKEN2GLOBALID(LASTLINE),
+    TOKEN2GLOBALID(BACKREF),
     tLAST_OP_ID = tPRESERVED_ID_END-1,
     idLAST_OP_ID = tLAST_OP_ID >> ID_SCOPE_SHIFT
 };

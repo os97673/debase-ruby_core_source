@@ -139,9 +139,11 @@ LONG WINAPI rb_w32_stack_overflow_handler(struct _EXCEPTION_POINTERS *);
 #if defined __GNUC__ && __GNUC__ == 4 && (__GNUC_MINOR__ >= 6 && __GNUC_MINOR__ <= 8)
 # define VAR_FROM_MEMORY(var) __extension__(*(__typeof__(var) volatile *)&(var))
 # define VAR_INITIALIZED(var) ((var) = VAR_FROM_MEMORY(var))
+# define VAR_NOCLOBBERED(var) volatile var
 #else
 # define VAR_FROM_MEMORY(var) (var)
 # define VAR_INITIALIZED(var) ((void)&(var))
+# define VAR_NOCLOBBERED(var) var
 #endif
 
 /* clear th->state, and return the value */
@@ -264,7 +266,7 @@ NORETURN(void rb_method_name_error(VALUE, VALUE));
 
 NORETURN(void rb_fiber_start(void));
 
-NORETURN(void rb_print_undef(VALUE, ID, int));
+NORETURN(void rb_print_undef(VALUE, ID, rb_method_visibility_t));
 NORETURN(void rb_print_undef_str(VALUE, VALUE));
 NORETURN(void rb_print_inaccessible(VALUE, ID, rb_method_visibility_t));
 NORETURN(void rb_vm_localjump_error(const char *,VALUE, int));
@@ -278,7 +280,6 @@ rb_cref_t *rb_vm_cref_replace_with_duplicated_cref(void);
 VALUE rb_vm_call_cfunc(VALUE recv, VALUE (*func)(VALUE), VALUE arg, const rb_block_t *blockptr, VALUE filename);
 void rb_vm_set_progname(VALUE filename);
 void rb_thread_terminate_all(void);
-VALUE rb_vm_top_self();
 VALUE rb_vm_cbase(void);
 
 #ifndef CharNext		/* defined as CharNext[AW] on Windows. */

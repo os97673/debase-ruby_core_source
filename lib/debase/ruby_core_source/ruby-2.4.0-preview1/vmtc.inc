@@ -59,6 +59,8 @@ static const void *const insns_address_table[] = {
   LABEL_PTR(defineclass),
   LABEL_PTR(send),
   LABEL_PTR(opt_str_freeze),
+  LABEL_PTR(opt_newarray_max),
+  LABEL_PTR(opt_newarray_min),
   LABEL_PTR(opt_send_without_block),
   LABEL_PTR(invokesuper),
   LABEL_PTR(invokeblock),

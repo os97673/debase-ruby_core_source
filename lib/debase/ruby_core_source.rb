@@ -4,7 +4,7 @@ require 'rbconfig'
 module Debase
   module RubyCoreSource
     REVISION_MAP = {
-      53028 => 'ruby-2.3.0-preview2',
+      55466 => 'ruby-2.4.0-preview1',
     }
 
     def self.create_makefile_with_core(hdrs, name)

@@ -42,10 +42,11 @@
 #define VMDEBUG 3
 #endif
 
+#include "ruby_assert.h"
+
 #if VM_CHECK_MODE > 0
 #define VM_ASSERT(expr) ( \
-	LIKELY(expr) ? (void)0 : \
-	rb_bug("%s:%d assertion violation - %s", __FILE__, __LINE__, #expr))
+	RUBY_ASSERT_WHEN(VM_CHECK_MODE > 0, expr))
 #else
 #define VM_ASSERT(expr) ((void)0)
 #endif
@@ -199,10 +200,11 @@ enum method_missing_reason {
     MISSING_NOENTRY   = 0x00,
     MISSING_PRIVATE   = 0x01,
     MISSING_PROTECTED = 0x02,
-    MISSING_VCALL     = 0x04,
-    MISSING_SUPER     = 0x08,
-    MISSING_MISSING   = 0x10,
-    MISSING_NONE      = 0x20
+    MISSING_FCALL     = 0x04,
+    MISSING_VCALL     = 0x08,
+    MISSING_SUPER     = 0x10,
+    MISSING_MISSING   = 0x20,
+    MISSING_NONE      = 0x40
 };
 
 struct rb_call_info {
@@ -249,12 +251,11 @@ struct rb_call_cache {
 };
 
 #if 1
-#define GetCoreDataFromValue(obj, type, ptr) do { \
-    (ptr) = (type*)DATA_PTR(obj); \
-} while (0)
+#define CoreDataFromValue(obj, type) (type*)DATA_PTR(obj)
 #else
-#define GetCoreDataFromValue(obj, type, ptr) Data_Get_Struct((obj), type, (ptr))
+#define CoreDataFromValue(obj, type) (type*)rb_data_object_get(obj)
 #endif
+#define GetCoreDataFromValue(obj, type, ptr) ((ptr) = CoreDataFromValue((obj), type))
 
 typedef struct rb_iseq_location_struct {
     VALUE path;
@@ -402,10 +403,8 @@ struct rb_iseq_struct {
     } aux;
 };
 
-#define USE_LAZY_LOAD 0
-
 #ifndef USE_LAZY_LOAD
-#define USE_LAZY_LOAD
+#define USE_LAZY_LOAD 0
 #endif
 
 #if USE_LAZY_LOAD
@@ -454,12 +453,22 @@ enum ruby_basic_operators {
     BOP_NEQ,
     BOP_MATCH,
     BOP_FREEZE,
+    BOP_MAX,
+    BOP_MIN,
 
     BOP_LAST_
 };
 
 #define GetVMPtr(obj, ptr) \
   GetCoreDataFromValue((obj), rb_vm_t, (ptr))
+
+struct rb_vm_struct;
+typedef void rb_vm_at_exit_func(struct rb_vm_struct*);
+
+typedef struct rb_at_exit_list {
+    rb_vm_at_exit_func *func;
+    struct rb_at_exit_list *next;
+} rb_at_exit_list;
 
 struct rb_objspace;
 struct rb_objspace *rb_objspace_alloc(void);
@@ -484,9 +493,10 @@ typedef struct rb_vm_struct {
     size_t living_thread_num;
     VALUE thgroup_default;
 
-    int running;
-    int thread_abort_on_exception;
-    int trace_running;
+    unsigned int running: 1;
+    unsigned int thread_abort_on_exception: 1;
+    unsigned int thread_report_on_exception: 1;
+    unsigned int trace_running: 1;
     volatile int sleeper;
 
     /* object management */
@@ -529,11 +539,7 @@ typedef struct rb_vm_struct {
 
     struct rb_objspace *objspace;
 
-    /*
-     * @shyouhei notes that this is not for storing normal Ruby
-     * objects so do *NOT* mark this when you GC.
-     */
-    struct RArray at_exit;
+    rb_at_exit_list *at_exit;
 
     VALUE *defined_strings;
     st_table *frozen_strings;
@@ -564,12 +570,12 @@ typedef struct rb_vm_struct {
 #define RUBY_VM_FIBER_MACHINE_STACK_SIZE_MIN  (  16 * 1024 * sizeof(VALUE)) /*   64 KB or  128 KB */
 
 /* optimize insn */
-#define FIXNUM_REDEFINED_OP_FLAG (1 << 0)
+#define INTEGER_REDEFINED_OP_FLAG (1 << 0)
 #define FLOAT_REDEFINED_OP_FLAG  (1 << 1)
 #define STRING_REDEFINED_OP_FLAG (1 << 2)
 #define ARRAY_REDEFINED_OP_FLAG  (1 << 3)
 #define HASH_REDEFINED_OP_FLAG   (1 << 4)
-#define BIGNUM_REDEFINED_OP_FLAG (1 << 5)
+/* #define BIGNUM_REDEFINED_OP_FLAG (1 << 5) */
 #define SYMBOL_REDEFINED_OP_FLAG (1 << 6)
 #define TIME_REDEFINED_OP_FLAG   (1 << 7)
 #define REGEXP_REDEFINED_OP_FLAG (1 << 8)
@@ -697,8 +703,6 @@ typedef struct rb_thread_struct {
     VALUE top_wrapper;
 
     /* eval env */
-    rb_block_t *base_block;
-
     VALUE *root_lep;
     VALUE root_svar;
 
@@ -741,20 +745,6 @@ typedef struct rb_thread_struct {
     struct rb_vm_tag *tag;
     struct rb_vm_protect_tag *protect_tag;
 
-    /*! Thread-local state of evaluation context.
-     *
-     *  If negative, this thread is evaluating the main program.
-     *  If positive, this thread is evaluating a program under Kernel::eval
-     *  family.
-     */
-    int parse_in_eval;
-
-    /*! Thread-local state of compiling context.
-     *
-     * If non-zero, the parser does not automatically print error messages to
-     * stderr. */
-    int mild_compile_error;
-
     /* storage */
     st_table *local_storage;
     VALUE local_storage_recursive_hash;
@@ -795,8 +785,9 @@ typedef struct rb_thread_struct {
     rb_ensure_list_t *ensure_list;
 
     /* misc */
-    enum method_missing_reason method_missing_reason;
-    int abort_on_exception;
+    enum method_missing_reason method_missing_reason: 8;
+    unsigned int abort_on_exception: 1;
+    unsigned int report_on_exception: 1;
 #ifdef USE_SIGALTSTACK
     void *altstack;
 #endif
@@ -825,7 +816,7 @@ RUBY_SYMBOL_EXPORT_BEGIN
 /* node -> iseq */
 rb_iseq_t *rb_iseq_new(NODE*, VALUE, VALUE, VALUE, const rb_iseq_t *parent, enum iseq_type);
 rb_iseq_t *rb_iseq_new_top(NODE *node, VALUE name, VALUE path, VALUE absolute_path, const rb_iseq_t *parent);
-rb_iseq_t *rb_iseq_new_main(NODE *node, VALUE path, VALUE absolute_path);
+rb_iseq_t *rb_iseq_new_main(NODE *node, VALUE path, VALUE absolute_path, const rb_iseq_t *parent);
 rb_iseq_t *rb_iseq_new_with_bopt(NODE*, VALUE, VALUE, VALUE, VALUE, VALUE, enum iseq_type, VALUE);
 rb_iseq_t *rb_iseq_new_with_opt(NODE*, VALUE, VALUE, VALUE, VALUE, const rb_iseq_t *parent, enum iseq_type, const rb_compile_option_t*);
 
@@ -1148,6 +1139,7 @@ enum {
 #define RUBY_VM_INTERRUPTED(th) ((th)->interrupt_flag & ~(th)->interrupt_mask & (PENDING_INTERRUPT_MASK|TRAP_INTERRUPT_MASK))
 #define RUBY_VM_INTERRUPTED_ANY(th) ((th)->interrupt_flag & ~(th)->interrupt_mask)
 
+VALUE rb_exc_set_backtrace(VALUE exc, VALUE bt);
 int rb_signal_buff_size(void);
 void rb_signal_exec(rb_thread_t *th, int sig);
 void rb_threadptr_check_signal(rb_thread_t *mth);
@@ -1159,6 +1151,7 @@ void rb_threadptr_unlock_all_locking_mutexes(rb_thread_t *th);
 void rb_threadptr_pending_interrupt_clear(rb_thread_t *th);
 void rb_threadptr_pending_interrupt_enque(rb_thread_t *th, VALUE v);
 int rb_threadptr_pending_interrupt_active_p(rb_thread_t *th);
+void rb_threadptr_error_print(rb_thread_t *th, VALUE errinfo);
 
 #define RUBY_VM_CHECK_INTS(th) ruby_vm_check_ints(th)
 static inline void

@@ -2,7 +2,7 @@
 
   insnhelper.h - helper macros to implement each instructions
 
-  $Author: ko1 $
+  $Author: nobu $
   created at: 04/01/01 15:50:34 JST
 
   Copyright (C) 2004-2007 Koichi Sasada
@@ -185,8 +185,8 @@ enum vm_regan_acttype {
 #define GET_GLOBAL_CONSTANT_STATE() (ruby_vm_global_constant_state)
 #define INC_GLOBAL_CONSTANT_STATE() (++ruby_vm_global_constant_state)
 
-static VALUE make_no_method_exception(VALUE exc, const char *format,
-				      VALUE obj, int argc, const VALUE *argv);
+static VALUE make_no_method_exception(VALUE exc, VALUE format, VALUE obj,
+				      int argc, const VALUE *argv, int priv);
 
 static inline struct vm_throw_data *
 THROW_DATA_NEW(VALUE val, rb_control_frame_t *cf, VALUE st)

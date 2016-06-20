@@ -181,10 +181,10 @@ static inline vm_call_handler
 vm_call_iseq_setup_func(const struct rb_call_info *ci, const int param_size, const int local_size)
 {
     if (UNLIKELY(ci->flag & VM_CALL_TAILCALL)) {
-	return vm_call_iseq_setup_tailcall_0start;
+	return &vm_call_iseq_setup_tailcall_0start;
     }
     else if (0) { /* to disable optimize */
-        return vm_call_iseq_setup_normal_0start;
+        return &vm_call_iseq_setup_normal_0start;
     }
     else {
 	if (param_size <= 3 &&
@@ -192,7 +192,7 @@ vm_call_iseq_setup_func(const struct rb_call_info *ci, const int param_size, con
 	    VM_ASSERT(local_size != 0);
 	    return vm_call_iseq_handlers[param_size][local_size-1];
 	}
-	return vm_call_iseq_setup_normal_0start;
+	return &vm_call_iseq_setup_normal_0start;
     }
 }
 
@@ -203,10 +203,10 @@ static inline vm_call_handler
 vm_call_iseq_setup_func(const struct rb_call_info *ci, struct rb_call_cache *cc)
 {
     if (UNLIKELY(ci->flag & VM_CALL_TAILCALL)) {
-	return vm_call_iseq_setup_tailcall_0start;
+	return &vm_call_iseq_setup_tailcall_0start;
     }
     else {
-        return vm_call_iseq_setup_normal_0start;
+        return &vm_call_iseq_setup_normal_0start;
     }
 }
 #endif

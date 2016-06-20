@@ -2,7 +2,7 @@
 
   iseq.h -
 
-  $Author: ko1 $
+  $Author: naruse $
   created at: 04/01/01 23:36:57 JST
 
   Copyright (C) 2004-2008 Koichi Sasada
@@ -27,15 +27,16 @@ rb_call_info_kw_arg_bytes(int keyword_len)
 }
 
 enum iseq_mark_ary_index {
-    ISEQ_MARK_ARY_COVERAGE      = 0,
-    ISEQ_MARK_ARY_FLIP_CNT      = 1,
-    ISEQ_MARK_ARY_ORIGINAL_ISEQ = 2,
+    ISEQ_MARK_ARY_COVERAGE,
+    ISEQ_MARK_ARY_FLIP_CNT,
+    ISEQ_MARK_ARY_ORIGINAL_ISEQ,
+    ISEQ_MARK_ARY_INITIAL_SIZE
 };
 
 static inline VALUE
 iseq_mark_ary_create(int flip_cnt)
 {
-    VALUE ary = rb_ary_tmp_new(3);
+    VALUE ary = rb_ary_tmp_new(ISEQ_MARK_ARY_INITIAL_SIZE);
     rb_ary_push(ary, Qnil);              /* ISEQ_MARK_ARY_COVERAGE */
     rb_ary_push(ary, INT2FIX(flip_cnt)); /* ISEQ_MARK_ARY_FLIP_CNT */
     rb_ary_push(ary, Qnil);              /* ISEQ_MARK_ARY_ORIGINAL_ISEQ */
@@ -123,16 +124,17 @@ const rb_iseq_t *rb_method_iseq(VALUE body);
 const rb_iseq_t *rb_proc_get_iseq(VALUE proc, int *is_proc);
 
 struct rb_compile_option_struct {
-    int inline_const_cache;
-    int peephole_optimization;
-    int tailcall_optimization;
-    int specialized_instruction;
-    int operands_unification;
-    int instructions_unification;
-    int stack_caching;
-    int trace_instruction;
-    int frozen_string_literal;
-    int debug_frozen_string_literal;
+    unsigned int inline_const_cache: 1;
+    unsigned int peephole_optimization: 1;
+    unsigned int tailcall_optimization: 1;
+    unsigned int specialized_instruction: 1;
+    unsigned int operands_unification: 1;
+    unsigned int instructions_unification: 1;
+    unsigned int stack_caching: 1;
+    unsigned int trace_instruction: 1;
+    unsigned int frozen_string_literal: 1;
+    unsigned int debug_frozen_string_literal: 1;
+    unsigned int coverage_enabled: 1;
     int debug_level;
 };
 
@@ -211,6 +213,7 @@ struct iseq_compile_data {
     unsigned int ci_index;
     unsigned int ci_kw_index;
     const rb_compile_option_t *option;
+    struct rb_id_table *ivar_cache_table;
 #if SUPPORT_JOKE
     st_table *labels_table;
 #endif
