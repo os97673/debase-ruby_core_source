@@ -1,3 +1,7 @@
+## [0.9.2](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.1...v0.9.2)
+
+* ruby 2.4.0-preview2 added
+
 ## [0.9.1](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.0...v0.9.1)
 
 * ruby 2.4.0-preview1 added
