@@ -13,17 +13,21 @@ def get_dest_dir(ruby_dir, version, tempdir)
   patchlevel = ENV['PATCHLEVEL']
   if !patchlevel
     puts "extracting patchlevel from version.h"
-    patchlevel = File.new("#{tempdir}/#{ruby_dir}/version.h").each_line do |li|
+    patchlevel = File.new("#{tempdir}/#{ruby_dir}/version.h").each_line.map do |li|
       if /#define RUBY_PATCHLEVEL (\d+)/ =~ li
         break $1
+      else
+        nil
       end
-    end
+    end.find { |p| not p.nil?}
     puts "extracted patchlevel '#{patchlevel}'"
   end
-  if !patchlevel
-    abort "Unable to extract patchlevel from verion.h please use a $PATCHLEVEL"
+  if patchlevel
+    dest_dir = dest_dir + "-p" + patchlevel
+  else
+    warn "Unable to extract patchlevel from verion.h assuming there is no patchlevel please use a $PATCHLEVEL to specify one"
   end
-  dest_dir = dest_dir + "-p" + patchlevel
+  dest_dir
 end
 
 desc <<DESCR
