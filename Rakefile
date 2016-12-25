@@ -19,7 +19,7 @@ def get_dest_dir(ruby_dir, version, tempdir)
       else
         nil
       end
-    end.find { |p| not p.nil?}
+    end#.find { |p| not p.nil?}
     puts "extracted patchlevel '#{patchlevel}'"
   end
   if patchlevel
