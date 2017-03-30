@@ -1,4 +1,8 @@
-## [0.9.8](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.7...v0.9.8)
+## [0.9.9](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.8...v0.9.9)
+
+* ruby 2.3.4 added
+
+### [0.9.8](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.7...v0.9.8)
 
 * ruby 2.2.7 added
 
