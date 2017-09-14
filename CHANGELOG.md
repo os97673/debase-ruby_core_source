@@ -1,3 +1,10 @@
+## [0.9.10](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.9...v0.9.10)
+
+* ruby 2.4.0 previews deleted
+* ruby 2.2.8 added
+* ruby 2.3.5 added
+* ruby 2.4.2 added
+
 ## [0.9.9](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.8...v0.9.9)
 
 * ruby 2.3.4 added
