@@ -4,7 +4,7 @@ that uses included Ruby headers (\*.h and \*.inc) instead of downloading
 them. Used by [debase](http://github.com/denofevil/debase).
 Only ruby >= 2.0.0 is supported (debase doesn't work for older rubies)
 
-##Usage
+## Usage
 
 Example use in extconf.rb:
 
@@ -27,7 +27,7 @@ add_source can use pre-downloaded .tgz (use TGZ_FILE_NAME to pass it)
 also it can extract patch level from version.h of downloaded sources, so
 PATCHLEVEL variable is optional.
 
-##Credits
+## Credits
 
 * @dirknilius for 2.2.3 headers
 * @andremedeiros for 2.1.1 headers
