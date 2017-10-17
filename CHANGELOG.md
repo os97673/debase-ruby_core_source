@@ -1,85 +1,85 @@
-## [0.9.11](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.10...v0.9.11)
+## [0.9.11](https://github.com/os97673/debase-ruby_core_source/compare/v0.9.10...v0.9.11)
 * ruby 2.5.0-preview1 added
 
-## [0.9.10](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.9...v0.9.10)
+## [0.9.10](https://github.com/os97673/debase-ruby_core_source/compare/v0.9.9...v0.9.10)
 
 * ruby 2.4.0 previews deleted
 * ruby 2.2.8 added
 * ruby 2.3.5 added
 * ruby 2.4.2 added
 
-## [0.9.9](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.8...v0.9.9)
+## [0.9.9](https://github.com/os97673/debase-ruby_core_source/compare/v0.9.8...v0.9.9)
 
 * ruby 2.3.4 added
 
-### [0.9.8](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.7...v0.9.8)
+### [0.9.8](https://github.com/os97673/debase-ruby_core_source/compare/v0.9.7...v0.9.8)
 
 * ruby 2.2.7 added
 
-### [0.9.7](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.6...v0.9.7)
+### [0.9.7](https://github.com/os97673/debase-ruby_core_source/compare/v0.9.6...v0.9.7)
 
 * ruby 2.4.1 added
 
-### [0.9.6](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.5...v0.9.6)
+### [0.9.6](https://github.com/os97673/debase-ruby_core_source/compare/v0.9.5...v0.9.6)
 
 * ruby 2.4.0 added
 
-## [0.9.5](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.4...v0.9.5)
+## [0.9.5](https://github.com/os97673/debase-ruby_core_source/compare/v0.9.4...v0.9.5)
 
 * ruby 2.4.0-rc1 added
 
-## [0.9.4](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.3...v0.9.4)
+## [0.9.4](https://github.com/os97673/debase-ruby_core_source/compare/v0.9.3...v0.9.4)
 
 * ruby 2.3.3 added
 
-## [0.9.3](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.2...v0.9.3)
+## [0.9.3](https://github.com/os97673/debase-ruby_core_source/compare/v0.9.2...v0.9.3)
 
 * ruby 2.3.2 added
 * ruby 2.2.6 added
 * ruby 2.4.0-preview3 added
 
-## [0.9.2](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.1...v0.9.2)
+## [0.9.2](https://github.com/os97673/debase-ruby_core_source/compare/v0.9.1...v0.9.2)
 
 * ruby 2.4.0-preview2 added
 
-## [0.9.1](https::/github.com/os97673/debase-ruby_core_source/compare/v0.9.0...v0.9.1)
+## [0.9.1](https://github.com/os97673/debase-ruby_core_source/compare/v0.9.0...v0.9.1)
 
 * ruby 2.4.0-preview1 added
 * ruby 2.3.0-preview2 removed
 
-## [0.9.0](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.6...v0.9.0)
+## [0.9.0](https://github.com/os97673/debase-ruby_core_source/compare/v0.8.6...v0.9.0)
 
 * ruby 2.3.1 added
 * ruby 2.2.5 added
 * add_source rake task reworked to extract patchlevel from sources
 
-## [0.8.6](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.5...v0.8.6)
+## [0.8.6](https://github.com/os97673/debase-ruby_core_source/compare/v0.8.5...v0.8.6)
 
 * ruby 2.1.10 added
 
-## [0.8.5](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.4...v0.8.5)
+## [0.8.5](https://github.com/os97673/debase-ruby_core_source/compare/v0.8.4...v0.8.5)
 
 * ruby 2.1.9 added
 
-## [0.8.4](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.3...v0.8.4)
+## [0.8.4](https://github.com/os97673/debase-ruby_core_source/compare/v0.8.3...v0.8.4)
 
 * ruby 2.3.0 added
 
-## [0.8.3](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.2...v0.8.3)
+## [0.8.3](https://github.com/os97673/debase-ruby_core_source/compare/v0.8.2...v0.8.3)
 
 * ruby 2.0.0-p648 added
 * ruby 2.1.8 added
 * ruby 2.2.4 added
 
-## [0.8.2](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.1...v0.8.2)
+## [0.8.2](https://github.com/os97673/debase-ruby_core_source/compare/v0.8.1...v0.8.2)
 
 * ruby 2.3.0-preview2 added
 
-## [0.8.1](https::/github.com/os97673/debase-ruby_core_source/compare/v0.8.0...v0.8.1)
+## [0.8.1](https://github.com/os97673/debase-ruby_core_source/compare/v0.8.0...v0.8.1)
 
 * ruby 2.3.0-preview1 added
 
-## [0.8.0](https::/github.com/os97673/debase-ruby_core_source/compare/v0.7.10...v0.8.0)
+## [0.8.0](https://github.com/os97673/debase-ruby_core_source/compare/v0.7.10...v0.8.0)
 
 * previous version of ruby is used if there is no headers for the
   current one.
