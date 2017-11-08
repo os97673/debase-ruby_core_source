@@ -16,8 +16,7 @@ module Debase
       end
 
       ruby_dir = if RUBY_PATCHLEVEL < 0
-        REVISION_MAP[RUBY_REVISION] or
-          no_source_abort("ruby-#{RUBY_VERSION} (revision #{RUBY_REVISION})")
+        REVISION_MAP[RUBY_REVISION] or "ruby-#{RUBY_VERSION}"
       else
         "ruby-#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
       end
@@ -49,7 +48,7 @@ module Debase
     def self.deduce_packaged_source_dir(ruby_dir)
       prefix = File.dirname(__FILE__) + '/ruby_core_source/'
       expected_directory = prefix + ruby_dir
-      if File.directory?(expected_directory)
+      if RUBY_REVISION > 0 and File.directory?(expected_directory)
         expected_directory
       else
         # Fallback to an older version.
@@ -58,7 +57,7 @@ module Debase
           select { |d| File.directory?(d) }.
           map { |d| [d, ruby_source_dir_version(d)] }.
           sort { |(_, v1), (_, v2)| -(v1 <=> v2) }.
-          find { |(_, v)| v < ruby_version }
+          find { |(_, v)| v <= ruby_version }
 
         version = File.basename(path)
         fallback_source_warning(ruby_dir, version)
@@ -67,15 +66,15 @@ module Debase
     end
 
     def self.ruby_source_dir_version(dir)
-      match = /ruby-([0-9\.]+)-p([0-9]+)/.match(dir)
+      match = /ruby-([0-9\.]+)-(.+)/.match(dir)
       Gem::Version.new("#{match[1]}.#{match[2]}")
     end
 
     def self.fallback_source_warning(ruby_version, fallback_version)
       warn <<-STR
 **************************************************************************
-No source for #{ruby_version} provided with debase-ruby_core_source gem.
-Falling back to #{fallback_version}.
+No source for #{ruby_version} (revision #{RUBY_REVISION}) provided with
+debase-ruby_core_source gem. Falling back to #{fallback_version}.
 **************************************************************************
 STR
     end
