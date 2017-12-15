@@ -6,6 +6,7 @@ module Debase
     REVISION_MAP = {
       57064 => 'ruby-2.4.0-rc1',
       60153 => 'ruby-2.5.0-preview1',
+      61243 => 'ruby-2.5.0-rc1',
     }
 
     def self.create_makefile_with_core(hdrs, name)
