@@ -29,6 +29,7 @@ PATCHLEVEL variable is optional.
 
 ## Credits
 
+* @valich for 2.5.0-preview1 headers and src-based ruby support
 * @dirknilius for 2.2.3 headers
 * @andremedeiros for 2.1.1 headers
 * @formigarafa for fixing 2.1.0 headers
