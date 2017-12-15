@@ -1,3 +1,10 @@
+## [0.10.1](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.0...v0.10.1)
+
+* ruby 2.2.9 added
+* ruby 2.3.6 added
+* ruby 2.4.3 added
+* ruby 2.5.0-rc1 added
+
 ## [0.10.0](https://github.com/os97673/debase-ruby_core_source/compare/v0.9.11...v0.10.0)
 
 * changed headers search to survive src-based rubies [#9](https://github.com/os97673/debase-ruby_core_source/pull/9) (contributed by [valich](https://github.com/valich))
