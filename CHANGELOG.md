@@ -1,3 +1,7 @@
+## [0.10.2](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.1...v0.10.2)
+
+* ruby 2.5.0 added
+
 ## [0.10.1](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.0...v0.10.1)
 
 * ruby 2.2.9 added
