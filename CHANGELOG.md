@@ -1,3 +1,8 @@
+## [0.10.3](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.2...v0.10.3)
+
+* ruby 2.5.1 added (contrinuted by [niw](https://github.com/niw))
+
+
 ## [0.10.2](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.1...v0.10.2)
 
 * ruby 2.5.0 added
