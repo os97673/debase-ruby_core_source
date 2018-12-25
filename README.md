@@ -22,10 +22,14 @@ To add another ruby version's source to this gem's directory:
 
     $ rake add_source VERSION=2.1.3 PATCHLEVEL=242
 
-(for pre-releases PATCHLEVEL should not be provided)
 add_source can use pre-downloaded .tgz (use TGZ_FILE_NAME to pass it)
 also it can extract patch level from version.h of downloaded sources, so
 PATCHLEVEL variable is optional.
+
+_Adding pre-release versions_. For pre-releases PATCHLEVEL should not be provided,
+as it is not present in distribution. To find sources of pre-release versions,
+this gem will look in `Debase::RubyCoreSource::REVISION_MAP` hash. Please add
+respective entry into this hash on adding pre-release version sources. 
 
 ## Credits
 

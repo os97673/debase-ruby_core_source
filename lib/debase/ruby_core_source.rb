@@ -4,9 +4,10 @@ require 'rbconfig'
 module Debase
   module RubyCoreSource
     REVISION_MAP = {
-      57064 => 'ruby-2.4.0-rc1',
-      60153 => 'ruby-2.5.0-preview1',
-      61243 => 'ruby-2.5.0-rc1',
+        # Add pre-release version here since they do not have patchlevel to refer to.
+        # Revision can be found at `revision.h` of ruby sources.
+        # Format of this hash:
+        # <RUBY_REVISION> => '<sources directory name>', e.g. `61243 => 'ruby-2.5.0-rc1'`
     }
 
     def self.create_makefile_with_core(hdrs, name)
