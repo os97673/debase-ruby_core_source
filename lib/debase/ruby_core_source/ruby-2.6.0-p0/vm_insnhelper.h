@@ -12,6 +12,8 @@
 #ifndef RUBY_INSNHELPER_H
 #define RUBY_INSNHELPER_H
 
+#include "regenc.h"
+
 RUBY_SYMBOL_EXPORT_BEGIN
 
 RUBY_EXTERN VALUE ruby_vm_const_missing_count;
