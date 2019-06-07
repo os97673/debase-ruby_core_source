@@ -1,3 +1,7 @@
+## [0.10.5](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.4...v0.10.5)
+
+* support for new git-hosted rubies (ruby 2.7+) added (contributed by [ViugiNick](https://github.com/ViugiNick))
+
 ## [0.10.4](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.3...v0.10.4)
 
 * ruby 2.6.0 added (contrinuted by [valich](https://github.com/valich))
