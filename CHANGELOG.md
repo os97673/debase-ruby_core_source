@@ -1,3 +1,8 @@
+## [0.10.6](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.5...v0.10.6)
+
+* ruby 2.6.5 added (contributed by [niw](https://github.com/niw))
+* improved a way the gem detects ruby location [#17](https://github.com/os97673/debase-ruby_core_source/pull/17) (contributed by [niw](https://github.com/niw))
+
 ## [0.10.5](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.4...v0.10.5)
 
 * support for new git-hosted rubies (ruby 2.7+) added (contributed by [ViugiNick](https://github.com/ViugiNick))
