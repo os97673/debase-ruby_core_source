@@ -1,3 +1,8 @@
+## [0.10.7](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.6...v0.10.7)
+
+* ruby 2.7.0-preview2 added (contributed by [ViugiNick](https://github.com/ViugiNick))
+* ruby location search fixed to work with preview rubies (contributed by [ViugiNick](https://github.com/ViugiNick))
+
 ## [0.10.6](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.5...v0.10.6)
 
 * ruby 2.6.5 added (contributed by [niw](https://github.com/niw))
