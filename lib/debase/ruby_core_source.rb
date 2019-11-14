@@ -8,6 +8,7 @@ module Debase
         # Revision can be found at `revision.h` of ruby sources.
         # Format of this hash:
         # <RUBY_REVISION> => '<sources directory name>', e.g. `61243 => 'ruby-2.5.0-rc1'`
+        '02aadf1032d71a3f81653a955f2635c8853b0aca' => 'ruby-2.7.0-preview2',
     }
 
     def self.create_makefile_with_core(hdrs, name)
@@ -68,7 +69,7 @@ module Debase
     end
 
     def self.ruby_source_dir_version(dir)
-      match = /ruby-([0-9\.]+)-((p|rc)[0-9]+)\z/.match(dir)
+      match = /ruby-([0-9\.]+)-((p|rc|preview)[0-9]+)\z/.match(dir)
       Gem::Version.new("#{match[1]}.#{match[2]}")
     end
 
