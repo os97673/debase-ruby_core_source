@@ -9,6 +9,7 @@ module Debase
         # Format of this hash:
         # <RUBY_REVISION> => '<sources directory name>', e.g. `61243 => 'ruby-2.5.0-rc1'`
         '02aadf1032d71a3f81653a955f2635c8853b0aca' => 'ruby-2.7.0-preview2',
+        'b563439274a402e33541f5695b1bfd4ac1085638' => 'ruby-2.7.0-preview3',
     }
 
     def self.create_makefile_with_core(hdrs, name)
