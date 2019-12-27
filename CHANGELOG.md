@@ -1,3 +1,7 @@
+## [0.10.9](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.8...v0.10.9)
+
+* ruby 2.7.0 added (contributed by [ViugiNick](https://github.com/ViugiNick))
+
 ## [0.10.8](https://github.com/os97673/debase-ruby_core_source/compare/v0.10.7...v0.10.8)
 
 * ruby 2.7.0-preview3 added (contributed by [ViugiNick](https://github.com/ViugiNick))
