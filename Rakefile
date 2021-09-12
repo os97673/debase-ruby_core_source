@@ -46,7 +46,7 @@ task :add_source do
     minor_version = version.split('.')[0..1].join('.')
     uri_path = "http://ftp.ruby-lang.org/pub/ruby/#{minor_version}/#{ruby_dir}.tar.gz"
     puts "Downloading #{uri_path}..."
-    temp = open(uri_path)
+    temp = URI.open(uri_path)
   end
   puts "Unpacking #{uri_path}..."
   tgz = Zlib::GzipReader.new(File.open(temp, "rb"))
